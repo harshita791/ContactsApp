@@ -25,23 +25,20 @@ public class ContactAdapterRecyclerView extends RecyclerView.Adapter<ContactAdap
 
     private final Context context;
     private final ArrayList<Contact> contacts;
-    private final ContactClickListener listner;
+    private final ContactClickListener listener;
 
 
-    public ContactAdapterRecyclerView(Context context, ArrayList<Contact> contacts, ContactClickListener listner) {
+    public ContactAdapterRecyclerView(Context context, ArrayList<Contact> contacts, ContactClickListener listener) {
         this.context = context;
         this.contacts = contacts;
-        this.listner = listner;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        /*LayoutInflater inflater = LayoutInflater.from(context);
-        RelativeLayout layout= (RelativeLayout) inflater.inflate(R.layout.contact_list_items1,null);
-        return new ViewHolder(layout);*/
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_list_items1,parent,false);
-        ViewHolder holder = new ViewHolder(view,context,contacts);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_list_items1, parent, false);
+        ViewHolder holder = new ViewHolder(view, context, contacts);
         return holder;
     }
 
@@ -50,12 +47,11 @@ public class ContactAdapterRecyclerView extends RecyclerView.Adapter<ContactAdap
         final Contact contact = contacts.get(position);
         holder.fName.setText(contact.getFirstName());
         holder.number.setText(contact.getMobile());
-        if(contact.getImage() == null){
+        if (contact.getImage() == null) {
             holder.imageView.setImageResource(R.drawable.contacts_icon);
-        }
-        else{
-            byte [] arr = Base64.decode(contact.getImage(),Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(arr,0,arr.length);
+        } else {
+            byte[] arr = Base64.decode(contact.getImage(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.length);
             holder.imageView.setImageBitmap(bitmap);
         }
 
@@ -66,16 +62,17 @@ public class ContactAdapterRecyclerView extends RecyclerView.Adapter<ContactAdap
         return contacts.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageView;
-        TextView fName,number;
-        ArrayList<Contact>contacts = new ArrayList<Contact>();
+        TextView fName, number;
+        ArrayList<Contact> contacts = new ArrayList<Contact>();
         Context context;
-        public ViewHolder(View itemView,Context context,ArrayList<Contact> contacts) {
+
+        public ViewHolder(View itemView, Context context, ArrayList<Contact> contacts) {
             super(itemView);
-            this.contacts=contacts;
-            this.context=context;
+            this.contacts = contacts;
+            this.context = context;
             itemView.setOnClickListener(this);
 
 
@@ -89,12 +86,11 @@ public class ContactAdapterRecyclerView extends RecyclerView.Adapter<ContactAdap
 
             int position = getAdapterPosition();
             Contact contact = this.contacts.get(position);
-            Intent intent= new Intent(this.context, ContactDetails.class);
-//            intent.putExtra("contact",contact.getId());
-            intent.putExtra("contact",contact.getId());
+            Intent intent = new Intent(this.context, ContactDetails.class);
+            intent.putExtra("contact", contact.getId());
             this.context.startActivity(intent);
         }
     }
-
-
 }
+
+

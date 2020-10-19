@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,19 +24,16 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ContactClickListener {
 
-    //ListView listView;
     RecyclerView recyclerView;
     ArrayList<Contact> contacts = new ArrayList<>();
-    //ContactAdapter adapter;
     ContactAdapterRecyclerView adapter;
-    //ContactClickListner listner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_recyclerview);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.saveFlaotingButton);
+        FloatingActionButton fab = findViewById(R.id.saveFlaotingButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,16 +50,10 @@ public class MainActivity extends AppCompatActivity implements ContactClickListe
 
     @Override
     protected void onResume() {
-        //contacts = getData();
         super.onResume();
         contacts = getData();
 
-        /*listView = findViewById(R.id.listView);
-        adapter = new ContactAdapter(this,R.layout.contact_list_items,contacts);
-        listView.setAdapter(adapter);*/
-
         recyclerView = findViewById(R.id.recyclerView);
-        //adapter = new ContactAdapterRecyclerView(this,contacts, listner);
         adapter = new ContactAdapterRecyclerView(this,contacts,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -71,16 +61,6 @@ public class MainActivity extends AppCompatActivity implements ContactClickListe
 
         adapter.notifyDataSetChanged();
 
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Contact contact = contacts.get(position);
-                Intent intent = new Intent(MainActivity.this,ContactDetails.class);
-                intent.putExtra("contact",contact);
-                startActivity(intent);
-                Toast.makeText(MainActivity.this,"item clicked"+position,Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
 
     @Override

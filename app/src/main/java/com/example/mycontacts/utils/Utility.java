@@ -35,7 +35,6 @@ public class Utility {
                     alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                         public void onClick(DialogInterface dialog, int which) {
-                            //requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
                             requestPermissions((Activity) context,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA},1);
                         }
                     });
@@ -53,25 +52,4 @@ public class Utility {
             return true;
         }
     }
-
-    /*private boolean requestForPermissions() {
-        boolean isPermissionOn = true;
-        final int version = Build.VERSION.SDK_INT;
-        if (version >= 23) {
-            if (!canAccessExternalSd()) {
-                isPermissionOn = false;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(EXTERNAL_PERMS,MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
-                }
-            }
-        }
-        return isPermissionOn;
-    }
-    public boolean canAccessExternalSd() {
-        return (hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE));
-    }
-    public boolean hasPermission(String perms) {
-        return (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(this, perms));
-    }
-*/
 }
